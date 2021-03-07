@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARMDataManager", "ARMDataManager\ARMDataManager.csproj", "{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
