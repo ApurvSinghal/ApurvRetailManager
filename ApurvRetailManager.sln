@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARMDataManager", "ARMDataManager\ARMDataManager.csproj", "{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ARMData", "ARMData\ARMData.sqlproj", "{9A2C6085-9265-46D6-B1CE-51AC6FBA04CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARMDesktopUI", "ARMDesktopUI\ARMDesktopUI.csproj", "{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,16 @@ Global
 		{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60A8803B-C748-43F2-B2BA-39F9EE03CFA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A2C6085-9265-46D6-B1CE-51AC6FBA04CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A2C6085-9265-46D6-B1CE-51AC6FBA04CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A2C6085-9265-46D6-B1CE-51AC6FBA04CB}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9A2C6085-9265-46D6-B1CE-51AC6FBA04CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A2C6085-9265-46D6-B1CE-51AC6FBA04CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A2C6085-9265-46D6-B1CE-51AC6FBA04CB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
