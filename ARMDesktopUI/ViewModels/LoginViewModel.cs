@@ -12,6 +12,7 @@ namespace ARMDesktopUI.ViewModels
     {
         private string _userName;
         private string _password;
+        private string _errorMessage;
         private IAPIHelper _apiHelper;
         public LoginViewModel(IAPIHelper apiHelper)
         {
@@ -39,6 +40,31 @@ namespace ARMDesktopUI.ViewModels
             }
         }
 
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set 
+            {
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => IsErrorVisible);
+                NotifyOfPropertyChange(() => ErrorMessage);
+            }
+        }
+
+        public bool IsErrorVisible
+        {
+            get 
+            {
+                bool output = false;
+                if(ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                }
+                return output; 
+            }
+        }
+
+
         public bool CanLogIn
         {
             get
@@ -57,12 +83,14 @@ namespace ARMDesktopUI.ViewModels
         {
             try
             {
+                ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
+
+                await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine(ex.Message);
+                ErrorMessage = ex.Message;
             }
         }
     }

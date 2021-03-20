@@ -9,6 +9,10 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ARMData", "ARMData\ARMData.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARMDesktopUI", "ARMDesktopUI\ARMDesktopUI.csproj", "{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARMDataManager.Library", "ARMDataManager.Library\ARMDataManager.Library.csproj", "{874C38E8-AEE0-4056-8F7F-93FA726A6CC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARMDesktopUI.Library", "ARMDesktopUI.Library\ARMDesktopUI.Library.csproj", "{05E01C8D-5360-4104-B39F-087B9B8B9A46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8A5B8AC-7E38-41F1-9EE3-F409B8AC80C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{874C38E8-AEE0-4056-8F7F-93FA726A6CC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{874C38E8-AEE0-4056-8F7F-93FA726A6CC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{874C38E8-AEE0-4056-8F7F-93FA726A6CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{874C38E8-AEE0-4056-8F7F-93FA726A6CC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05E01C8D-5360-4104-B39F-087B9B8B9A46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05E01C8D-5360-4104-B39F-087B9B8B9A46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05E01C8D-5360-4104-B39F-087B9B8B9A46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05E01C8D-5360-4104-B39F-087B9B8B9A46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
