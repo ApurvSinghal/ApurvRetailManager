@@ -11,17 +11,15 @@ namespace ARMDesktopUI.ViewModels
     public class ShellViewModel : Conductor<Object>, IHandle<LogOnEvent>
     {
         private SalesViewModel _salesVM;
-        private SimpleContainer _simpleContainer;
         private IEventAggregator _eventAggregator;
-        public ShellViewModel(IEventAggregator eventAggregator,SalesViewModel salesVM, SimpleContainer simpleContainer)
+        public ShellViewModel(IEventAggregator eventAggregator,SalesViewModel salesVM)
         {
             _salesVM = salesVM;
             _eventAggregator = eventAggregator;
-            _simpleContainer = simpleContainer;
 
             _eventAggregator.Subscribe(this);
             
-            ActivateItem(_simpleContainer.GetInstance<LoginViewModel>());
+            ActivateItem(IoC.Get <LoginViewModel>());
         }
 
         public void Handle(LogOnEvent message)
