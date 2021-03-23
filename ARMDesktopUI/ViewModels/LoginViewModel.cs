@@ -1,4 +1,5 @@
-﻿using ARMDesktopUI.Helpers;
+﻿using ARMDesktopUI.EventModels;
+using ARMDesktopUI.Library.Api;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,16 @@ namespace ARMDesktopUI.ViewModels
         private string _password;
         private string _errorMessage;
         private IAPIHelper _apiHelper;
-        public LoginViewModel(IAPIHelper apiHelper)
+        private IEventAggregator _eventAggregator;
+        public LoginViewModel(IAPIHelper apiHelper,IEventAggregator eventAggregator)
         {
             _apiHelper = apiHelper;
+            _eventAggregator = eventAggregator;
+
+#if DEBUG
+            UserName = "apurv@test.com";
+            Password = "Test@123";
+# endif
         }
 
         public string UserName
@@ -87,6 +95,8 @@ namespace ARMDesktopUI.ViewModels
                 var result = await _apiHelper.Authenticate(UserName, Password);
 
                 await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+
+                _eventAggregator.PublishOnUIThread(new LogOnEvent());
             }
             catch (Exception ex)
             {
