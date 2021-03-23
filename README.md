@@ -2,7 +2,9 @@
 This is a Retail Management System by Apurv Singhal
 
 
-This project includes these technologies
+
+
+**This project includes these technologies :-**
   - Unit Testing
   - Dependency Injection
   - WPF
