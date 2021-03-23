@@ -113,6 +113,11 @@ namespace ARMDesktopUI.ViewModels
         {
             decimal tax = 0;
             decimal taxRate = _configHelper.GetTaxRate()/100;
+
+            tax = Cart
+                .Where(x => x.Product.IsTaxable)
+                .Sum(x => x.Product.RetailPrice * x.QuantityInCart * taxRate);
+
             foreach (var item in Cart)
             {
                 if (item.Product.IsTaxable)
