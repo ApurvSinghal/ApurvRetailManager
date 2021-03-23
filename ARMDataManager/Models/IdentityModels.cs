@@ -21,7 +21,7 @@ namespace ARMDataManager.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("ARMEFData", throwIfV1Schema: false)
         {
         }
         
