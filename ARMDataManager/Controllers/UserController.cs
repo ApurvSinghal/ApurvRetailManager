@@ -10,7 +10,7 @@ using System.Web.Http;
 namespace ARMDataManager.Controllers
 {
     [Authorize]
-    public class UserController : ApiController
+    public class UserController : ApiController 
     {
         [HttpGet]
         public UserModel GetbyId()
