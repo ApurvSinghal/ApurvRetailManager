@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ARMDesktopUI.Library.Helpers
+namespace ARMDataManager.Library
 {
-    public class ConfigHelper : IConfigHelper
+    public class ConfigHelper
     {
         //TODO: move this to Config from the API
-        public decimal GetTaxRate()
+        public static decimal GetTaxRate()
         {
 
             string rateText = ConfigurationManager.AppSettings["taxRate"];
@@ -24,6 +24,5 @@ namespace ARMDesktopUI.Library.Helpers
 
             return output;
         }
-
     }
 }
