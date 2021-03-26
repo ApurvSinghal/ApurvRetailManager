@@ -1,6 +1,8 @@
 ﻿using ARMDesktopUI.Library.Api;
 using ARMDesktopUI.Library.Helpers;
 using ARMDesktopUI.Library.Models;
+using ARMDesktopUI.Models;
+using AutoMapper;
 using Caliburn.Micro;
 using System;
 using System.Collections.Generic;
@@ -16,11 +18,14 @@ namespace ARMDesktopUI.ViewModels
         private IProductEndpoint _productEndpoint;
         private IConfigHelper _configHelper;
         private ISaleEndpoint _saleEndpoint;
-        public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper,ISaleEndpoint saleEndpoint)
+        private IMapper _mapper;
+        public SalesViewModel(IProductEndpoint productEndpoint, IConfigHelper configHelper,
+            ISaleEndpoint saleEndpoint, IMapper mapper)
         {
             _productEndpoint = productEndpoint;
             _configHelper = configHelper;
             _saleEndpoint = saleEndpoint;
+            _mapper = mapper; 
         }
 
         protected override async void OnViewLoaded(object view)
@@ -32,14 +37,15 @@ namespace ARMDesktopUI.ViewModels
         private async Task LoadProducts()
         {
             var productList = await _productEndpoint.GetAll();
-            Products = new BindingList<ProductModel>(productList);
+            var displayProducts = _mapper.Map<List<ProductDisplayModel>>(productList);
+            Products = new BindingList<ProductDisplayModel>(displayProducts);
         }
 
-        private BindingList<ProductModel> _products;
+        private BindingList<ProductDisplayModel> _products;
         private int _itemQuantity = 1;
-        private BindingList<CartItemModel> _cart = new BindingList<CartItemModel>();
+        private BindingList<CartItemDisplayModel> _cart = new BindingList<CartItemDisplayModel>();
 
-        public BindingList<ProductModel> Products
+        public BindingList<ProductDisplayModel> Products
         {
             get { return _products; }
             set 
@@ -49,9 +55,9 @@ namespace ARMDesktopUI.ViewModels
             }
         }
 
-        private ProductModel _selectedProduct;
+        private ProductDisplayModel _selectedProduct;
 
-        public ProductModel SelectedProduct
+        public ProductDisplayModel SelectedProduct
         {
             get { return _selectedProduct; }
             set 
@@ -73,7 +79,7 @@ namespace ARMDesktopUI.ViewModels
             }
         }
 
-        public BindingList<CartItemModel> Cart
+        public BindingList<CartItemDisplayModel> Cart
         {
             get { return _cart; }
             set 
@@ -160,24 +166,22 @@ namespace ARMDesktopUI.ViewModels
 
         public void AddToCart()
         {
-            try
-            {
                 var existingItem = Cart.FirstOrDefault(x => x.Product == SelectedProduct);
 
                 if(existingItem != null)
                 {
                     existingItem.QuantityInCart += ItemQuantity;
-                    Cart.Remove(existingItem);
-                    Cart.Add(existingItem);
+                    //Cart.Remove(existingItem);
+                    //Cart.Add(existingItem);
                 }
                 else
                 {
-                    CartItemModel cartItemModel = new CartItemModel
+                    CartItemDisplayModel cartItemDisplayModel = new CartItemDisplayModel
                     {
                         Product = SelectedProduct,
                         QuantityInCart = ItemQuantity
                     };
-                    Cart.Add(cartItemModel);
+                    Cart.Add(cartItemDisplayModel);
                 }
                 
                 SelectedProduct.QuantityInStock -= ItemQuantity;
@@ -186,10 +190,6 @@ namespace ARMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => Tax);
                 NotifyOfPropertyChange(() => Total);
                 NotifyOfPropertyChange(() => CanCheckOut);
-            }
-            catch (Exception ex)
-            {
-            }
         }
 
         public bool CanRemoveFromCart
@@ -206,16 +206,10 @@ namespace ARMDesktopUI.ViewModels
 
         public void RemoveFromCart()
         {
-            try
-            {
                 NotifyOfPropertyChange(() => SubTotal);
                 NotifyOfPropertyChange(() => Tax);
                 NotifyOfPropertyChange(() => Total);
                 NotifyOfPropertyChange(() => CanCheckOut);
-            }
-            catch (Exception ex)
-            {
-            }
         }
 
         public bool CanCheckOut
