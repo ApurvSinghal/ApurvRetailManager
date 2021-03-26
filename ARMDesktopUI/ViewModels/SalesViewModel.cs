@@ -208,12 +208,7 @@ namespace ARMDesktopUI.ViewModels
             {
                 bool output = false;
 
-                //if(SelectedCartItem != null && SelectedCartItem.Product.QuantityInStock > 0)
-                //{
-                //    output = true;
-                //}
-
-                if (SelectedCartItem != null)
+                if (SelectedCartItem != null && SelectedCartItem?.QuantityInCart > 0)
                 {
                     output = true;
                 }
@@ -235,13 +230,13 @@ namespace ARMDesktopUI.ViewModels
                 Cart.Remove(SelectedCartItem);
             }
             
-
-
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
             NotifyOfPropertyChange(() => CanCheckOut);
+            NotifyOfPropertyChange(() => CanAddToCart);
             NotifyOfPropertyChange(() => CanRemoveFromCart);
+
         }
 
         public bool CanCheckOut
@@ -273,6 +268,19 @@ namespace ARMDesktopUI.ViewModels
             }
 
             await _saleEndpoint.PostSale(saleModel);
+            await ResetSalesViewModel();
+        }
+
+        private async Task ResetSalesViewModel()
+        {
+            Cart = new BindingList<CartItemDisplayModel>();
+
+            await LoadProducts();
+
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
         }
     }
 }
