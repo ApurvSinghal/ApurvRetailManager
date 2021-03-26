@@ -68,6 +68,19 @@ namespace ARMDesktopUI.ViewModels
             }
         }
 
+        private CartItemDisplayModel _selectedCartItem;
+
+        public CartItemDisplayModel SelectedCartItem
+        {
+            get { return _selectedCartItem; }
+            set 
+            { 
+                _selectedCartItem = value;
+                NotifyOfPropertyChange(() => CanRemoveFromCart);
+            }
+        }
+
+
         public int ItemQuantity
         {
             get { return _itemQuantity; }
@@ -152,9 +165,6 @@ namespace ARMDesktopUI.ViewModels
             {
                 bool output = false;
 
-                //Make sure something is selected
-                //Make sure there is something in the list
-
                 if(ItemQuantity > 0 && SelectedProduct?.QuantityInStock >= ItemQuantity)
                 {
                     output = true;
@@ -198,7 +208,15 @@ namespace ARMDesktopUI.ViewModels
             {
                 bool output = false;
 
-                //Make sure something is selected
+                //if(SelectedCartItem != null && SelectedCartItem.Product.QuantityInStock > 0)
+                //{
+                //    output = true;
+                //}
+
+                if (SelectedCartItem != null)
+                {
+                    output = true;
+                }
 
                 return output;
             }
@@ -206,10 +224,24 @@ namespace ARMDesktopUI.ViewModels
 
         public void RemoveFromCart()
         {
-                NotifyOfPropertyChange(() => SubTotal);
-                NotifyOfPropertyChange(() => Tax);
-                NotifyOfPropertyChange(() => Total);
-                NotifyOfPropertyChange(() => CanCheckOut);
+            SelectedCartItem.Product.QuantityInStock += 1;
+
+            if (SelectedCartItem.QuantityInCart > 1)
+            {
+                SelectedCartItem.QuantityInCart -= 1;
+            }
+            else
+            {
+                Cart.Remove(SelectedCartItem);
+            }
+            
+
+
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckOut);
+            NotifyOfPropertyChange(() => CanRemoveFromCart);
         }
 
         public bool CanCheckOut
