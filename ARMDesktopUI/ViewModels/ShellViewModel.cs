@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ARMDesktopUI.EventModels;
+using ARMDesktopUI.Library.Api;
 using ARMDesktopUI.Library.Models;
 using Caliburn.Micro;
 
@@ -14,12 +15,14 @@ namespace ARMDesktopUI.ViewModels
         private SalesViewModel _salesVM;
         private IEventAggregator _eventAggregator;
         private ILoggedInUserModel _loggedInUserModel;
+        private IAPIHelper _aPIHelper;
         public ShellViewModel(IEventAggregator eventAggregator,SalesViewModel salesVM,
-            ILoggedInUserModel loggedInUserModel)
+            ILoggedInUserModel loggedInUserModel, IAPIHelper aPIHelper)
         {
             _salesVM = salesVM;
             _eventAggregator = eventAggregator;
             _loggedInUserModel = loggedInUserModel;
+            _aPIHelper = aPIHelper;
 
             _eventAggregator.Subscribe(this);
             
@@ -39,7 +42,8 @@ namespace ARMDesktopUI.ViewModels
 
         public void LogOut()
         {
-            _loggedInUserModel.LogOffUser();
+            _loggedInUserModel.ResetUser();
+            _aPIHelper.LogOffUser();
             ActivateItem(IoC.Get<LoginViewModel>());
             NotifyOfPropertyChange(() => IsLoggedIn);
 

@@ -37,6 +37,11 @@ namespace ARMDesktopUI.Library.Api
             _apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        public void LogOffUser()
+        {
+            _apiClient.DefaultRequestHeaders.Clear(); 
+        }
+
         public async Task<AuthenticatedUser> Authenticate(string userName, string password)
         {
             var data = new FormUrlEncodedContent(new[]
