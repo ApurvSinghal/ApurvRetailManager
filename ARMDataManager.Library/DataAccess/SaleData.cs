@@ -52,22 +52,33 @@ namespace ARMDataManager.Library.DataAccess
             sale.Total = sale.SubTotal + sale.Tax;
 
             //Save the sale record to DB 
-            SqlDataAccess sql = new SqlDataAccess();
-
-            sql.SaveData("dbo.spSale_Insert", sale, "ARMData");
-
-            //Get the ID from Sale Model
-            sale.Id = sql.LoadData<int, dynamic>("dbo.spSale_lookup", new { sale.CashierId, sale.SaleDate } ,"ARMData").FirstOrDefault();
-
-
-            //Finish filling in the sale details
-            foreach(var item in saleDetailList)
+            using (SqlDataAccess sql = new SqlDataAccess())
             {
-                item.SaleId = sale.Id;
+                try
+                {
+                    sql.StartTransaction("ARMData");
 
-                //Save sale detail record to DB
-                sql.SaveData<SaleDetailDBModel>("dbo.spSaleDetail_Insert", item, "ARMData");
+                    sql.SaveData("dbo.spSale_Insert", sale, "ARMData");
 
+                    //Get the ID from Sale Model
+                    sale.Id = sql.LoadDataInTransaction<int, dynamic>("dbo.spSale_lookup", new { sale.CashierId, sale.SaleDate }).FirstOrDefault();
+
+                    //Finish filling in the sale details
+                    foreach (var item in saleDetailList)
+                    {
+                        item.SaleId = sale.Id;
+
+                        //Save sale detail record to DB
+                        sql.SaveDataInTransaction<SaleDetailDBModel>("dbo.spSaleDetail_Insert", item);
+                    }
+
+                    sql.CommitTransaction();
+                }
+                catch (Exception ex)
+                {
+                    sql.RollbackTransaction(); 
+                    throw;
+                }
             }
         }
     }
