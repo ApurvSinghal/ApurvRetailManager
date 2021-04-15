@@ -41,6 +41,7 @@ namespace ARMDataManager.Library.Internal.DataAccess
 
         private IDbConnection _connection;
         private IDbTransaction _transaction;
+        private bool isClosed = false;
 
         public void StartTransaction(string connectionStringName)
         {
@@ -49,6 +50,8 @@ namespace ARMDataManager.Library.Internal.DataAccess
             _connection = new SqlConnection(connectionString);
             _connection.Open();
             _transaction = _connection.BeginTransaction();
+
+            isClosed = false;
         }
 
         public List<T> LoadDataInTransaction<T, U>(string storedProcedure, U parameters)
@@ -68,17 +71,34 @@ namespace ARMDataManager.Library.Internal.DataAccess
         {
             _transaction?.Commit();
             _connection?.Close();
+
+            isClosed = true;
         }
 
         public void RollbackTransaction()
         {
             _transaction?.Rollback();
             _connection?.Close();
+
+            isClosed = true;
         }
 
         public void Dispose()
         {
-            //CommitTransaction();
+            if(!isClosed)
+            {
+                try
+                {
+                    CommitTransaction();
+                }
+                catch
+                {
+                    //TODO - Log this issue
+                }
+            }
+
+            _transaction = null;
+            _connection = null;
         }
     }
 }
