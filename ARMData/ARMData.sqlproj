@@ -9,8 +9,7 @@
     <ProjectGuid>{9a2c6085-9265-46d6-b1ce-51ac6fba04cb}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath>
-    </RootPath>
+    <RootPath />
     <RootNamespace>ARMData</RootNamespace>
     <AssemblyName>ARMData</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
@@ -48,7 +47,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -77,6 +75,9 @@
     <Build Include="dbo\Stored Procedures\spSale_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spSaleDetail_Insert.sql" />
     <Build Include="dbo\Stored Procedures\spSale_Lookup.sql" />
+    <Build Include="dbo\Stored Procedures\spInventory_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spInventory_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spSale_SaleReport.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ARMData.refactorlog" />

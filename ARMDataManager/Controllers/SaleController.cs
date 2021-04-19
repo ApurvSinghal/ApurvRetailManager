@@ -20,5 +20,12 @@ namespace ARMDataManager.Controllers
 
             saleData.SaveSale(saleModel, userId);
         }
+
+        [Route("GetSalesReport")]
+        public List<SaleReportModel> GetSalesReport()
+        {
+            SaleData saleData = new SaleData();
+            return saleData.GetSaleReport();
+        }
     }
 }
