@@ -12,12 +12,14 @@ namespace ARMDataManager.Controllers
     [Authorize]
     public class InventoryController : ApiController
     {
+        [Authorize(Roles ="Admin,Manager")]
         public List<InventoryModel> Get()
         {
             InventoryData inventoryData = new InventoryData();
             return inventoryData.GetInventory();
         }
 
+        [Authorize(Roles ="Admin")]
         public void Post(InventoryModel item)
         {
             InventoryData inventoryData = new InventoryData();
