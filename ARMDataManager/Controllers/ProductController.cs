@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace ARMDataManager.Controllers
 {
-    [Authorize(Roles = "Cashier")  ]
+    [Authorize(Roles = " ")  ]
     public class ProductController : ApiController
     {
         public List<ProductModel> Get()
