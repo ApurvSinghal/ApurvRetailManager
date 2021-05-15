@@ -26,13 +26,18 @@ namespace ARMDesktopUI.ViewModels
 
             _eventAggregator.Subscribe(this);
             
-            ActivateItem(IoC.Get <LoginViewModel>());
+            ActivateItem(IoC.Get<LoginViewModel>());
         }
 
         public void Handle(LogOnEvent message)
         {
             ActivateItem(_salesVM);
             NotifyOfPropertyChange(() => IsLoggedIn); 
+        }
+
+        public void UserManagement()
+        {
+            //ActivateItem(IoC.Get<UserDisplayViewModel>());
         }
 
         public void ExitApplication()

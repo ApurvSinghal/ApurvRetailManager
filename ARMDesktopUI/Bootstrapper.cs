@@ -18,7 +18,6 @@ namespace ARMDesktopUI
 {
     class Bootstrapper : BootstrapperBase
     {
-
         private SimpleContainer _container = new SimpleContainer();
         public Bootstrapper()
         {
@@ -48,7 +47,8 @@ namespace ARMDesktopUI
 
             _container.Instance(_container)
                 .PerRequest<IProductEndpoint, ProductEndpoint>()
-                .PerRequest<ISaleEndpoint,SaleEndpoint>();
+                .PerRequest<ISaleEndpoint,SaleEndpoint>()
+                .PerRequest<IUserEndpoint,UserEndpoint>();
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
