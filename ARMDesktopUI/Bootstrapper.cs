@@ -47,8 +47,8 @@ namespace ARMDesktopUI
 
             _container.Instance(_container)
                 .PerRequest<IProductEndpoint, ProductEndpoint>()
-                .PerRequest<ISaleEndpoint,SaleEndpoint>()
-                .PerRequest<IUserEndpoint,UserEndpoint>();
+                .PerRequest<IUserEndpoint, UserEndpoint>()
+                .PerRequest<ISaleEndpoint,SaleEndpoint>();
 
             _container
                 .Singleton<IWindowManager, WindowManager>()

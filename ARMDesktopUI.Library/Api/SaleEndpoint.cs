@@ -32,21 +32,5 @@ namespace ARMDesktopUI.Library.Api
                 }
             }
         }
-
-        //public async Task<List< >> GetAll()
-        //{
-        //    using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/Product"))
-        //    {
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var result = await response.Content.ReadAsAsync<List<ProductModel>>();
-        //            return result;
-        //        }
-        //        else
-        //        {
-        //            throw new Exception(response.ReasonPhrase);
-        //        }
-        //    }
-        //}
     }
 }
